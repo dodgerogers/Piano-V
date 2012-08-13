@@ -1,0 +1,11 @@
+<% if comments.any? %>
+<% comments.each do |comment| %>
+	<div class="comments">
+		<h5><%= comment.user.name %></h5>
+		<%= comment.content %><br/>
+		<span class="timestamp">
+			posted <%= time_ago_in_words(comment.created_at) %> ago.
+			</span>
+		</div>
+	<% end %>
+<% end %>

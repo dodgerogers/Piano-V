@@ -19,7 +19,6 @@ html {
 body {
   	padding-top: 60px;
 		border-bottom:1px;
-		background-color: #fdfdfd;
 	
 }
 
@@ -180,3 +179,26 @@ input, textarea, select, .uneditable-input {
   @extend .control-group;
   @extend .error;
  }
+
+
+.comments {
+	min-height: 30px;
+	max-width: 500px;
+	padding: 5px;
+	margin-top: 5px;
+	margin-left: 0px;
+	background-color: #fafafa;
+
+	&:hover {
+		background-color: #efefef;
+
+
+	}
+}
+
+.comment {
+	text-align:left;
+	padding: 5px;
+	margin-top: 5px;
+	margin-left: 105px;
+}

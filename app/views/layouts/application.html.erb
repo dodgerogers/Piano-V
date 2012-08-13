@@ -16,16 +16,31 @@
 	          <span class="icon-bar"></span>
 	          <span class="icon-bar"></span>
 	        </a>
-	        	<%= link_to "Notice board", root_path, id: "logo" %>
+	        	<%= link_to "Virtual Piano", root_path, id: "logo" %>
 	        <div class="nav-collapse">
 	          <ul class="nav pull-right">
-	            <li><%= link_to "links", "#" %></li>
+							<li><%= link_to 'New song', new_post_path %></li>
+						</div>
 	          </ul>
 	        </div>
 	      </div>
 	    </div>
 	  </div>
 			<div class="container">
+				<div class="user_nav">
+					<% if current_user %>
+					
+							Signed in as <b><%= current_user.name %></b>
+							<%= link_to "Sign out", signout_path, id: "sign_out"%>
+					<% else %>
+						<%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+					<% end %>
+					</div>
+				
+					
+				<% flash.each do |key, value| %>
+	        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+	      <% end %>
 				<%= yield %>
 					<br/>
 					<%= render 'layouts/footer' %>

@@ -1,16 +1,15 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
+gem 'jquery-rails', '2.0.0'
 gem 'bootstrap-sass', '2.0.0'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.5'
-gem 'sqlite3'
 
 
 group :development, :test do
-  gem 'sqlite3'
 	gem 'pg', '0.12.2'
   gem 'rspec-rails', '2.9.0'
 end
@@ -28,7 +27,9 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
-gem 'jquery-rails'
+gem 'mysql2'
+gem 'omniauth-facebook', '1.4.0'
+gem 'koala'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
