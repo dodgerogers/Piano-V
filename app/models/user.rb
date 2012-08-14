@@ -17,4 +17,8 @@ class User < ActiveRecord::Base
   def facebook
     @facebook ||= Koala::Facebook::API.new(oauth_token)
   end
+  
+  def profile_pic(user)
+    @picture ||= user.facebook.get_picture("me")
+  end
 end

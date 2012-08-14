@@ -1,17 +1,24 @@
 <div class="center hero-unit">
-<h2><%= @post.song_name %></h2>
-		<br/>
-		transcript by: <b><%= @post.user.name %></b>
-		<br/>
-		<br/>
-    <%= @post.song %><br/>
-		updated <%= time_ago_in_words(@post.updated_at) %> ago.
+	<h1><%= @post.song_name %></h1>
+			<br/>
+		<h2>transcript by: <b><%= @post.user.name %></b></h2>
+		<% picture = @post.user.facebook.get_picture("me") %>
+		<%= image_tag picture %>
+			<br/>
+			<br/>
+    <%= @post.song %>
+			<br/>
+			<br/>
+		<span class="timestamp">
+			updated <%= time_ago_in_words(@post.updated_at) %> ago.
+		</span>
+			<%= link_to 'Edit', edit_post_path(@post) %> 
 <br/>
 </div>
 
 <%= render partial: "comments/form", locals: { post_id: @post.id } %>
-<%= render partial: "comments/show", locals: { comments: @comments } %>
+<%= render partial: "comments/show", locals: { comments: @comments, post_id: @post.id } %>
 
 
-<%= link_to 'Edit', edit_post_path(@post) %> 
 <%= link_to 'Back', posts_path %>
+

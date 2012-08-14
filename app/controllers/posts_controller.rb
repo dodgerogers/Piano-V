@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   
   def index
     @posts = Post.search(params[:search])
+    @paginate_posts = Post.paginate(page: params[:page], per_page: 15).search(params[:search])
   end
 
   
@@ -34,7 +35,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", notice: "please sign in to post" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -42,13 +43,12 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit", notice: "please try again" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +57,6 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :no_content }

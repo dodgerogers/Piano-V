@@ -1,9 +1,14 @@
-<%= link_to 'post comments', '#', class: 'js-comment' %>	
+<% if !signed_in %>
+		please sign in to post comments
+<% else %>
+<%= link_to 'post a comment', '#', class: 'js-comment' %>
 		<%= form_for [Comment.new(post_id: post_id)] do |f| %>
 		<%= f.hidden_field :post_id %>
 	<div class="field">
-		<%= f.text_field :content, placeholder: "enter comment", class: "span7"%>
+		<%= f.text_area :content, placeholder: "enter comment", class: "span5"%>
+		<br/>
 		<%= f.submit "submit", class: "btn-large btn-success" %>
 		</div>
 		<% end %>
 		<br/>
+		<% end %>
