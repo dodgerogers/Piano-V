@@ -1,20 +1,22 @@
 <div class="center hero-unit">
 	<h1><%= @post.song_name %></h1>
+			<p>Transcript by: <%= @post.user.name %><br/>
+					Rating: <%= @post.rating %>/10</p>
 			<br/>
-		<h2>transcript by: <b><%= @post.user.name %></b></h2>
-		<% picture = @post.user.facebook.get_picture("me") %>
-		<%= image_tag picture %>
-			<br/>
-			<br/>
-    <%= @post.song %>
-			<br/>
-			<br/>
-		<span class="timestamp">
-			updated <%= time_ago_in_words(@post.updated_at) %> ago.
-		</span>
-			<%= link_to 'Edit', edit_post_path(@post) %> 
-<br/>
-</div>
+    		<p><%= @post.song %></p>
+			<br/><br/>
+			<span class="timestamp">
+				updated <%= time_ago_in_words(@post.updated_at) %> ago.
+			</span>
+				<%= link_to 'Edit', edit_post_path(@post) %>
+    		 
+			<br/><br/>
+				<% if !signed_in %>
+					please login to rate songs
+				<% else %>
+					<%= render partial: "ratings/form", locals: { post_id: @post.id }%>
+				<% end %>
+		</div>
 
 <%= render partial: "comments/form", locals: { post_id: @post.id } %>
 <%= render partial: "comments/show", locals: { comments: @comments, post_id: @post.id } %>

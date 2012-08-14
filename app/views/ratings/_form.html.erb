@@ -1,0 +1,6 @@
+
+<%= form_for [Rating.new(post_id: post_id)] do |f| %>
+	<%= f.hidden_field :post_id %>
+		<%= f.select :rating, [1,2,3,4,5,6,7,8,9,10], class: "span1" %>
+		<%= f.submit "rate",class: "btn-mini btn-primary"%>
+	<% end %>

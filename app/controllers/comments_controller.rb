@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
       flash[:success] = "comment created!"
       redirect_to :back
     else
-      flash[:error] = "please try again"
+      flash[:error] = "comment content can't be blank, please try again"
       redirect_to :back
     end
   end

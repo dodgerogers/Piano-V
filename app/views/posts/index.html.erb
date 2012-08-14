@@ -1,27 +1,35 @@
 
-<div class="center hero-unit">
-<h1>Virtual Piano Song Sheets</h1>
-	<br/>
-	<br/>
-	<h2>Search for you favourite songs</h2>
-		<%= form_tag posts_path, method: "get" do %>
-		<%= text_field_tag :search, params[:search], placeholder: "enter a song title", class: "span3" %>
-		<%= submit_tag "search", name: nil, class: "btn-large btn-primary" %>
-	<% end %>
-</div>
+	<div class="center hero-unit">
+		<h1>Virtual Piano Music Library</h1>
+			<p>Welcome to Virtual Piano Music Sheets - A new music language created by innovative Virtual Pianists from all over the world </p>
+		<%= render partial: "posts/copy" %>
+			<br/><br/>
+			<h2>Search for you favourite songs</h2>
+				<%= form_tag posts_path, method: "get" do %>
+					<%= text_field_tag :search, params[:search], placeholder: "enter a song title", class: "span3" %>
+					<%= submit_tag "search", name: nil, class: "btn-large btn-primary"  %>
+				<% end %>
+			</div>
 
-<%= will_paginate @paginate_posts %>
-<% if @paginate_posts.any? %>
-<% @paginate_posts.each do |post| %>
-  <h4><%= link_to post.song_name, post %></h4>
-		Author: <%= link_to post.user.name, "#" %><br/>
-		rating: <br/>
-    		<%= link_to 'edit', edit_post_path(post) %>
-    		<%= link_to 'destroy', post, confirm: 'Are you sure?', method: :delete %>
-			<br/>
-			<br/>
+			<legend>Music library</legend>
+			
+			<%= will_paginate @paginate_posts %>
+
+			<% if @paginate_posts.any? %>
+				<% @paginate_posts.each do |post| %>
+  			<h4><%= link_to post.song_name, post %></h4>
+				Author: <%= link_to post.user.name, "#" %><br/>
+					<% if post.rating == nil %>
+						No one has rated this yet<br/>
+					<% else %>
+						Rating: <%= post.rating %>/10<br/>
+					<% end %>
+				<br/>
 		<% end %>
 <% end %>
+
+<%= will_paginate @paginate_posts %>
+
 
 
 

@@ -29,13 +29,24 @@
 			<div class="container">
 				<div class="user_nav">
 					<% if current_user %>
-							Signed in as <b><%= current_user.name %></b>
-							<%= link_to "Sign out", signout_path, id: "sign_out"%>
-					<% else %>
-						<%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-					<% end %>
-					</div>
+						<% picture = current_user.facebook.get_picture("me") %>
+							<div class="image_right">
+								<%= image_tag picture %>
+							</div>
+							<div align="right">
+								Signed in as<br/> 
+								<b><%= current_user.name%></b>
+								<br/>
+									<%= link_to "Sign out", signout_path, id: "sign_out"%>
+								<% else %>
+								<div align="right">
+									<%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+									</div>
+								<% end %>
+							</div>
+						<br/>
 				
+
 					
 				<% flash.each do |key, value| %>
 	        <%= content_tag(:div, value, class: "alert alert-#{key}") %>

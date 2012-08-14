@@ -3,7 +3,8 @@ class Comment < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
   
-  validates_presence_of :user_id, :content
+  validates_presence_of :user_id, :post_id
+  validates :content, presence: true, length: { maximum: 300 }
   
   default_scope order: "comments.created_at DESC"
 end

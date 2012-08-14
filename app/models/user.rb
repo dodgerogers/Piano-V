@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :name
   has_many :comments, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -16,9 +17,5 @@ class User < ActiveRecord::Base
   
   def facebook
     @facebook ||= Koala::Facebook::API.new(oauth_token)
-  end
-  
-  def profile_pic(user)
-    @picture ||= user.facebook.get_picture("me")
   end
 end

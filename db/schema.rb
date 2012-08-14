@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813182059) do
+ActiveRecord::Schema.define(:version => 20120814152846) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
@@ -29,9 +29,17 @@ ActiveRecord::Schema.define(:version => 20120813182059) do
     t.string   "song"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.float    "rating"
   end
 
   add_index "posts", ["song_name", "created_at", "updated_at"], :name => "index_posts_on_song_name_and_created_at_and_updated_at"
+
+  create_table "ratings", :force => true do |t|
+    t.float   "average"
+    t.integer "rating"
+    t.integer "user_id"
+    t.integer "post_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "provider"

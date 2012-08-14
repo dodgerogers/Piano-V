@@ -2,16 +2,25 @@
 	<% if comments.any? %>
 		<% comments.each do |comment| %>
 			<ul class="comments">
+				<div class="image">
+					<% pic = comment.user.facebook.get_picture("me") %>
+					<%= image_tag pic %>
+					</div>
 			<h5><%= link_to comment.user.name, "#" %></h5>
 			<%= comment.content %><br/>
 		<span class="timestamp">
 			posted <%= time_ago_in_words(comment.created_at) %> ago.
 			</span>
 			<div class="pull-right">
-			<%= link_to "delete", comment_path(comment.id),
+				<% if current_user %>
+					<% if current_user.id != comment.user_id %>
+					<% else %>
+						<%= link_to "delete", comment_path(comment.id),
 			 																		method:  :delete,
 																					title:   comment.content %>
-																				
+					<% end %>
+				<% else %>
+			<% end %>														
 		</ul>
 	<% end %>
 <% end %>

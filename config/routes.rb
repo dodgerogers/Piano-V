@@ -5,6 +5,7 @@ Canvas::Application.routes.draw do
   
   resources :posts 
   resources :comments
+  resources :ratings
   
   root to: "posts#index"
   # The priority is based upon order of creation:

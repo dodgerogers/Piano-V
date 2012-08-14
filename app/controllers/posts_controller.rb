@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments
+    @ratings = @post.ratings
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }

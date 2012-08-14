@@ -18,8 +18,9 @@ html {
 
 body {
   	padding-top: 0px;
-		border-bottom:1px;
-	
+		border-bottom:1px;	
+		background-image:url('music_sheet1.png');
+		background-repeat: no-repeat;
 }
 
 
@@ -29,6 +30,10 @@ section {
 
 textarea {
   max-height:150px
+}
+
+select {
+	max-width:50px
 }
 
 .center {
@@ -69,6 +74,9 @@ p {
   line-height: 1.7em;
 }
 
+.white {
+	color: #FFFFFF;
+}
 
 /* header */
 
@@ -236,3 +244,15 @@ aside {
 
 	}
 }
+
+.image {
+	float:left;
+	padding-right:5px;
+}
+
+.image_right {
+	float:right;
+	padding-left:5px;
+}
+
+	

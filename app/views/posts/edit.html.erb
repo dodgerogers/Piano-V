@@ -1,6 +1,13 @@
-<legend>Edit song</legend>
-
-<%= render 'form' %>
+<h1>Edit song</h1>
+	<% if !current_user %>
+		please login to edit<br/>
+		<% else %>
+			<% if current_user.id != @post.user.id %>
+				You can only edit your own songs<br/>
+			<% else %>
+				<%= render 'form' %>
+			<% end %>
+	<% end %>
 
 <%= link_to 'Show', @post %> |
 <%= link_to 'Back', posts_path %>
