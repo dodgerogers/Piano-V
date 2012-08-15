@@ -1,4 +1,4 @@
-class AddRatingsToPosts  < ActiveRecord::Migration
+class CreateRatingsTable < ActiveRecord::Migration
   def up
     create_table :ratings do |t|
       t.float :average
