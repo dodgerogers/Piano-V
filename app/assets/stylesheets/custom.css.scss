@@ -32,6 +32,10 @@ textarea {
   max-height:400px
 }
 
+textfield {
+	height: 100%;
+}
+
 select {
 	max-width:50px
 }
@@ -161,7 +165,7 @@ aside {
 
 /* forms */
 
-input, textarea, textfield, select, .uneditable-input {
+input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   padding: 10px;
