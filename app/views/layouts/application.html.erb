@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Notice</title>
+  <title>Virtual Piano Music Library</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -40,7 +40,7 @@
 									<%= link_to "Sign out", signout_path, id: "sign_out"%>
 								<% else %>
 								<div align="right">
-									<%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+									<b><%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %></b>
 									</div>
 								<% end %>
 							</div>

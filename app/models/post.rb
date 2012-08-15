@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :user_id
   validates :song_name, presence: true, length: { maximum: 70 }
-  validates :song, presence: true, length: { maximum: 600 }
+  validates :song, presence: true, length: { maximum: 10000 }
   
   default_scope order: "posts.created_at DESC"
   
