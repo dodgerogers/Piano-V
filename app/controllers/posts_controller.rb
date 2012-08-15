@@ -49,7 +49,7 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, success: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit", error: "please try again" }
+        format.html { render "edit", error: "please try again" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

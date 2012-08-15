@@ -1,43 +1,23 @@
 require 'spec_helper'
 
 describe PostsController do
-
-  def valid_attributes
-    {}
-  end
-  
-  def valid_session
-    {}
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+    @post = FactoryGirl.attributes_for(:post, user_id: @user)
+    controller.stub!(:current_user).and_return(@user)
   end
 
   describe "GET index" do
-    it "assigns all posts as @posts" do
-      post = Post.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:posts).should eq([post])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested post as @post" do
-      post = Post.create! valid_attributes
-      get :show, {:id => post.to_param}, valid_session
-      assigns(:post).should eq(post)
+    it "renders index template" do
+      get :index
+      response.should render_template :index
     end
   end
 
   describe "GET new" do
     it "assigns a new post as @post" do
-      get :new, {}, valid_session
+      get :new
       assigns(:post).should be_a_new(Post)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested post as @post" do
-      post = Post.create! valid_attributes
-      get :edit, {:id => post.to_param}, valid_session
-      assigns(:post).should eq(post)
     end
   end
 
@@ -45,18 +25,18 @@ describe PostsController do
     describe "with valid params" do
       it "creates a new Post" do
         expect {
-          post :create, {:post => valid_attributes}, valid_session
+          post :create, user_id: @user, post: @post
         }.to change(Post, :count).by(1)
       end
 
       it "assigns a newly created post as @post" do
-        post :create, {:post => valid_attributes}, valid_session
+        post :create, post: @post
         assigns(:post).should be_a(Post)
         assigns(:post).should be_persisted
       end
 
       it "redirects to the created post" do
-        post :create, {:post => valid_attributes}, valid_session
+        post :create, post: @post
         response.should redirect_to(Post.last)
       end
     end
@@ -65,75 +45,69 @@ describe PostsController do
       it "assigns a newly created but unsaved post as @post" do
         # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        post :create, {:post => {}}, valid_session
+        post :create, post: @post
         assigns(:post).should be_a_new(Post)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Post.any_instance.stub(:save).and_return(false)
-        post :create, {:post => {}}, valid_session
+        post :create, post: @post
         response.should render_template("new")
       end
     end
   end
 
   describe "PUT update" do
+    before(:each) do
+      @post = FactoryGirl.create(:post, song: "fade to black", song_name: "metallica")
+    end
+    
+    it "assigns the requested post as @post" do
+      put :update, id: @post, post: FactoryGirl.attributes_for(:post)
+      assigns(:post).should eq(@post)
+    end
+    
     describe "with valid params" do
       it "updates the requested post" do
-        post = Post.create! valid_attributes
-        # Assuming there are no other posts in the database, this
-        # specifies that the Post created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Post.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => post.to_param, :post => {'these' => 'params'}}, valid_session
-      end
-
-      it "assigns the requested post as @post" do
-        post = Post.create! valid_attributes
-        put :update, {:id => post.to_param, :post => valid_attributes}, valid_session
-        assigns(:post).should eq(post)
+        put :update, id: @post, post: FactoryGirl.attributes_for(:post, song_name: "enter sandman")
+        @post.reload
+        @post.song_name.should eq("enter sandman")
       end
 
       it "redirects to the post" do
-        post = Post.create! valid_attributes
-        put :update, {:id => post.to_param, :post => valid_attributes}, valid_session
-        response.should redirect_to(post)
+        put :update, id: @post, post: FactoryGirl.attributes_for(:post)
+        response.should redirect_to @post
       end
     end
 
     describe "with invalid params" do
-      it "assigns the post as @post" do
-        post = Post.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Post.any_instance.stub(:save).and_return(false)
-        put :update, {:id => post.to_param, :post => {}}, valid_session
-        assigns(:post).should eq(post)
+      it "doesn not change @post attributes" do
+        put :update, id: @post, post: FactoryGirl.attributes_for(:post, song_name: "")
+        @post.reload
+        @post.song_name.should_not eq("")
       end
 
       it "re-renders the 'edit' template" do
-        post = Post.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Post.any_instance.stub(:save).and_return(false)
-        put :update, {:id => post.to_param, :post => {}}, valid_session
-        response.should render_template("edit")
+        put :update, id: @post, post: FactoryGirl.attributes_for(:post)
+        response.should redirect_to @post
       end
     end
   end
 
   describe "DELETE destroy" do
+    before(:each) do
+      @post = FactoryGirl.create(:post)
+    end
+    
     it "destroys the requested post" do
-      post = Post.create! valid_attributes
       expect {
-        delete :destroy, {:id => post.to_param}, valid_session
+        delete :destroy, id: @post
       }.to change(Post, :count).by(-1)
     end
 
     it "redirects to the posts list" do
-      post = Post.create! valid_attributes
-      delete :destroy, {:id => post.to_param}, valid_session
-      response.should redirect_to(posts_url)
+      delete :destroy, id: @post
+      response.should redirect_to posts_url
     end
   end
 

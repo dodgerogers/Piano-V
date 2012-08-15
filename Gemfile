@@ -27,6 +27,11 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
+group :test do
+  gem 'capybara', '1.1.2'
+  gem 'factory_girl_rails', '1.4.0'
+end
+
 gem 'mysql2'
 gem 'omniauth-facebook', '1.4.0'
 gem 'koala'

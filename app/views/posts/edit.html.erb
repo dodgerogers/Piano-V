@@ -1,6 +1,6 @@
 <h1>Edit song</h1>
-	<% if !current_user %>
-		please login to edit<br/>
+	<% if !current_user %><br/>
+		<p>please login to edit</p><br/>
 		<% else %>
 			<% if current_user.id != @post.user.id %>
 				You can only edit your own songs<br/>
