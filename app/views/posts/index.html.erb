@@ -6,8 +6,8 @@
 			<br/><br/>
 			<h2>Search for you favourite songs</h2>
 				<%= form_tag posts_path, method: "get" do %>
-					<%= text_field_tag :search, params[:search], placeholder: "enter a song title", class: "span3" %>
-					<%= submit_tag "search", name: nil, class: "btn-large btn-primary"  %>
+					<%= text_field_tag :search, params[:search], placeholder: "enter a song title", class: 'span3' %>
+					<%= submit_tag "search", name: nil, class: "btn btn-large"  %>
 				<% end %>
 			</div>
 
@@ -29,7 +29,6 @@
 <% end %>
 
 <%= will_paginate @paginate_posts %>
-
 
 
 
