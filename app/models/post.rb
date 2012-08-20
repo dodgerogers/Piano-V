@@ -14,7 +14,7 @@ class Post < ActiveRecord::Base
   
   def self.search(search)
     if search
-      find(:all, conditions: ['song_name LIKE ?', "%#{search.downcase}%"])
+      find(:all, conditions: ['song_name ILIKE ?', "%#{search}%"])
     else
       find(:all)
     end
