@@ -14,6 +14,7 @@ class Post < ActiveRecord::Base
   
   def self.search(search)
     if search
+      #NEED TO ADD ILIKE FOR HEROKU POSTGRESQL DATABASE
       find(:all, conditions: ['song_name ILIKE ?', "%#{search}%"])
     else
       find(:all)

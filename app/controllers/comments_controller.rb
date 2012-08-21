@@ -1,5 +1,10 @@
 class CommentsController < ApplicationController
   
+  def show
+    @post = Post.find(params[:id])
+    @comment = @post.comments.includes(:user)
+  end
+  
   def create
     @comment = current_user.comments.build(params[:comment])
     if @comment.save

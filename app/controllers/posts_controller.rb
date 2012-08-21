@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
   
   def index
-    @paginate_posts = Post.paginate(page: params[:page], per_page: 10).search(params[:search])
+    @paginate_posts = Post.paginate(page: params[:page], per_page: 10).includes(:user).search(params[:search])
   end
 
   
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments
+    @comments = @post.comments.includes(:user)
     @ratings = @post.ratings
     respond_to do |format|
       format.html 

@@ -34,6 +34,7 @@ end
 gem 'mysql2'
 gem 'omniauth-facebook', '1.4.0'
 gem 'koala'
+gem "bullet", group: :development
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
