@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  "sessions testing"
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+  end
 end

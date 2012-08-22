@@ -12,6 +12,10 @@ class Post < ActiveRecord::Base
   
   default_scope order: "posts.created_at DESC"
   
+  def to_param
+    "#{id} #{song_name}".parameterize
+  end
+  
   def self.search(search)
     if search
       #NEED TO ADD ILIKE FOR HEROKU POSTGRESQL DATABASE

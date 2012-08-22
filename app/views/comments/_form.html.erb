@@ -1,13 +1,13 @@
 <% if !signed_in %>
 		please sign in to post comments
 <% else %>
-<%= link_to 'post a comment', '#', class: 'js-comment' %>
-		<%= form_for [Comment.new(post_id: post_id)] do |f| %>
-		<%= f.hidden_field :post_id %>
-	<div class="field">
-		<%= f.text_field :content, placeholder: "enter comment", class: "span6"%>
-		<%= f.submit "submit", class: "btn btn-large" %>
-		</div>
+		<%= link_to 'post a comment', '#', class: 'js-comment' %>
+				<%= form_for [Comment.new(post_id: post_id)] do |f| %>
+				<%= f.hidden_field :post_id %>
+			<div class="field">
+				<%= f.text_field :content, placeholder: "enter comment", class: "span6"%>
+				<%= f.submit "submit", class: "btn btn-large" %>
+			</div>
 		<% end %>
-		<br/>
-		<% end %>
+	<br/>
+<% end %>
