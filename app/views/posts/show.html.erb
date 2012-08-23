@@ -1,7 +1,7 @@
 <div class="center hero-unit">
 	<h1><%= @post.song_name %></h1>
 			<p>Transcript by: <%= link_to @post.user.name, "#" %><br/>
-					Rating: <%= @post.rating %>/10</p>
+					Rating: <%= number_with_precision(@post.rating, precision: 2) %>/10</p>
 			<br/>
     		<p><%= raw @post.song %></p>
 			<br/>
@@ -14,8 +14,14 @@
 				<% if !signed_in %>
 					please login to rate songs
 				<% else %>
-					<%= render partial: "ratings/form", locals: { post_id: @post.id }%>
-				<% end %>
+					<% if current_user.id == @post.user_id %>
+						<span class="timestamp">
+							you can't rate your own songs
+						</span>
+					<% else %>
+						<%= render partial: "ratings/form", locals: { post_id: @post.id }%>
+					<% end %>
+		 	 <% end %>
 		</div>
 
 <%= render partial: "comments/form", locals: { post_id: @post.id } %>

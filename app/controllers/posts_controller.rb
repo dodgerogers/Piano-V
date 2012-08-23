@@ -8,7 +8,6 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments.includes(:user)
-    @ratings = @post.ratings
     respond_to do |format|
       format.html 
       format.json { render json: @post }
@@ -19,7 +18,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.json { render json: @post }
     end
   end
@@ -32,10 +31,10 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(params[:post])
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, success: 'Post was successfully created.' }
+        format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else
-        format.html { render action: "new", error: "please sign in to post" }
+        format.html { render action: "new", notice: "please sign in to post" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -45,10 +44,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html { redirect_to @post, success: 'Post was successfully updated.' }
+        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render "edit", error: "please try again" }
+        format.html { render "edit", notice: "please try again" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

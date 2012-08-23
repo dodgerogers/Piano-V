@@ -22,7 +22,7 @@
 					<% if post.rating == nil %>
 						No one has rated this yet<br/>
 					<% else %>
-						Rating: <%= post.rating %>/10<br/>
+						Rating: <%= number_with_precision(post.rating, precision:2) %>/10<br/>
 					<% end %>
 				<br/>
 		<% end %>
